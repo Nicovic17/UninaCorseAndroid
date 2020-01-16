@@ -28,8 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int livelloBatteria, accIniziale;
-    private TextView textView,txtAcc,txtTemp;
+    private int livelloBatteria, accIniziale, temp, speed;
+    private TextView textView, txtAcc, txtTemp;
     private LocationManager locationManager;
     private Location location;
 
@@ -39,30 +39,83 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.txtView);
-        txtAcc=findViewById(R.id.txtAcc);
-        txtTemp=findViewById(R.id.txtTemp);
+        txtAcc = findViewById(R.id.txtAcc);
+        txtTemp = findViewById(R.id.txtTemp);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
         /*AggionaPosizione aggionaPosizione=new AggionaPosizione();
         aggionaPosizione.start();*/
 
-        livelloBatteria=100;
-        accIniziale=0;
+        livelloBatteria = 100;
+        accIniziale = 0;
+        temp = 20;
+        speed = 100;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         sendBatteryData(database);
         readBatteryData(database);
 
+        sendTempData(database);
+        //readTempData(database);
+
+        sendSpeedData(database);
+        //readSpeedData(database);
+
         sendAccData(database);
         readAccData(database);
 
     }
 
+    private void sendSpeedData(final FirebaseDatabase database) {
+
+        final DatabaseReference myRef = database.getReference();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (speed == 100) {
+                    myRef.child("Speed").setValue("Sei al massimo.");
+                } else {
+                    speed += 5;
+                    myRef.child("Speed").setValue(speed + "km/h");
+                }
+
+
+                sendSpeedData(database);
+            }
+        }, 1500);
+
+    }
+
+    private void sendTempData(final FirebaseDatabase database) {
+
+        final DatabaseReference myRef = database.getReference();
+
+        if (temp == 100) {
+            myRef.child("Temp").setValue("A breve prende fuoco tutto!");
+            temp = 25;
+        } else
+            temp++;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                myRef.child("Temp").setValue(temp + "°");
+
+                sendTempData(database);
+            }
+        }, 5000);
+
+
+    }
+
     private void readAccData(FirebaseDatabase database) {
 
-        DatabaseReference myRef=database.getReference("Accelerazione");
+        DatabaseReference myRef = database.getReference("Accelerazione");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,43 +123,41 @@ public class MainActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
-                txtAcc.setText("Accelerazione: "+value+"%");
+                txtAcc.setText("Accelerazione: " + value + "%");
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Toast.makeText(MainActivity.this,"Error"+error,Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Error" + error, Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void sendAccData(final FirebaseDatabase database)
-    {
+    private void sendAccData(final FirebaseDatabase database) {
 
-        if(accIniziale!=200)
+        if (accIniziale != 200)
             accIniziale++;
         else
-            accIniziale=60;
+            accIniziale = 60;
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                DatabaseReference myRef=database.getReference();
+                DatabaseReference myRef = database.getReference();
 
-                myRef.child("Accelerazione").setValue(accIniziale+"");
+                myRef.child("Accelerazione").setValue(accIniziale + "");
 
                 sendAccData(database);
             }
-        },2000);
+        }, 2000);
     }
 
-    private void sendBatteryData(final FirebaseDatabase database)
-    {
-        final boolean loop=true;
-        if(livelloBatteria!=0)
-            livelloBatteria-=1;
+    private void sendBatteryData(final FirebaseDatabase database) {
+        final boolean loop = true;
+        if (livelloBatteria != 0)
+            livelloBatteria -= 1;
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -115,25 +166,24 @@ public class MainActivity extends AppCompatActivity {
                 DatabaseReference ref;
                 ref = database.getReference();
 
-                if(livelloBatteria==0)
-                {
+                if (livelloBatteria == 0) {
                     ref.child("Batteria").setValue("Ricarica");
-                    livelloBatteria=100;
+                    livelloBatteria = 100;
                 }
 
-                ref.child("Batteria").setValue(livelloBatteria+"");
+                ref.child("Batteria").setValue(livelloBatteria + "");
 
-                if(loop)
+                if (loop)
                     sendBatteryData(database);
 
             }
-        },1000);
+        }, 1000);
 
     }
 
     private void readBatteryData(FirebaseDatabase database) {
 
-        DatabaseReference myRef=database.getReference("Batteria");
+        DatabaseReference myRef = database.getReference("Batteria");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -141,88 +191,72 @@ public class MainActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
-                textView.setText("Batteria: "+value+"%");
+                textView.setText("Batteria: " + value + "%");
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Toast.makeText(MainActivity.this,"Error"+error,Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Error" + error, Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
-    public class AggionaPosizione extends Thread{
+    public class AggionaPosizione extends Thread {
 
-        FirebaseDatabase database=FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         @Override
         public void run() {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
-            while(true)
-            {
+            while (true) {
                 getLocation(database);
             }
 
         }
     }
 
-    public void getLocation(FirebaseDatabase database)
-    {
-        locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-        {
+    public void getLocation(FirebaseDatabase database) {
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             OnGps();
-        }
-        else
-        {
-            if(ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED)
-            {
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-            }
-            else
-            {
-                Location locationGPS=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                Location locationNetwork=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                Location locationPassive=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        } else {
+            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            } else {
+                Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                Location locationNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                Location locationPassive = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 
-                if(locationGPS!=null)
-                {
-                    double lat=locationGPS.getLatitude();
-                    double longi=locationGPS.getLongitude();
+                if (locationGPS != null) {
+                    double lat = locationGPS.getLatitude();
+                    double longi = locationGPS.getLongitude();
 
-                    String latitude=String.valueOf(lat);
+                    String latitude = String.valueOf(lat);
                     //textView2.setText(latitude);
-                    Log.d("MainActivity",latitude);
+                    Log.d("MainActivity", latitude);
                     DatabaseReference myRef;
-                    myRef=database.getReference();
+                    myRef = database.getReference();
                     myRef.child("Latitudine").setValue(latitude);
                     /*new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                         }
                     },2000);*/
-                }
-                else
-                if(locationNetwork!=null)
-                {
-                    double lat=locationNetwork.getLatitude();
-                    double longi=locationNetwork.getLongitude();
+                } else if (locationNetwork != null) {
+                    double lat = locationNetwork.getLatitude();
+                    double longi = locationNetwork.getLongitude();
 
-                    String latitude=String.valueOf(lat);
-                }
-                else
-                if(locationPassive!=null)
-                {
-                    double lat=locationPassive.getLatitude();
-                    double longi=locationPassive.getLongitude();
+                    String latitude = String.valueOf(lat);
+                } else if (locationPassive != null) {
+                    double lat = locationPassive.getLatitude();
+                    double longi = locationPassive.getLongitude();
 
-                    String latitude=String.valueOf(lat);
-                }
-                else
-                {
-                    Toast.makeText(this,"No pos",Toast.LENGTH_LONG).show();
+                    String latitude = String.valueOf(lat);
+                } else {
+                    Toast.makeText(this, "No pos", Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -230,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void OnGps() {
 
-        final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -244,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final AlertDialog alertDialog=builder.create();
+        final AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "871786861348-8hp8hrthdm18e9otbl1d8ofba91eiaug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.uninacorse",
+            "certificate_hash": "2053bfd3c6d0653152c22b73b8a47315c4dff9d6"
+          }
+        },
+        {
           "client_id": "871786861348-qgkrgmkre0k3cre5sjp2fukccc1ae9vr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
