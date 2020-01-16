@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Batteria");
-
+        DatabaseReference myRef = database.getReference("/Battery");
 
         sendData(database);
 
@@ -69,17 +68,27 @@ public class MainActivity extends AppCompatActivity {
 
                 if(livelloBatteria==0)
                 {
-                    ref.child("Batteria").setValue("Ricarica");
+                    ref.child("Battery").setValue("Ricarica");
                     livelloBatteria=100;
                 }
 
-                ref.child("Batteria").setValue(livelloBatteria+"");
+                ref.child("Battery").setValue(livelloBatteria+"");
 
                 if(loop)
                     sendData(database);
 
             }
         },1000);
+
+    }
+
+}
+
+class TempThread extends Thread{
+
+
+    @Override
+    public void run(){
 
     }
 }
