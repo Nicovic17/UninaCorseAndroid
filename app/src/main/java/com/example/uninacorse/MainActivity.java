@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Write a message to the database
+                // Write a  message to the database
                 DatabaseReference ref;
                 ref = database.getReference();
 
