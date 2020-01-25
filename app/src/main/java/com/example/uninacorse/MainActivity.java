@@ -17,8 +17,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.SeekBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,9 +32,11 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     private int livelloBatteria, accIniziale, temp, speed;
-    private TextView textView, txtAcc, txtTemp;
+    private TextView textView, txtAcc, txtTemp, txtSpeed, txtThrottle;
     private LocationManager locationManager;
+    private SeekBar speedBar,throttleBar;
     private Location location;
+    private Button incTempButt,decTempButt,eqTempButt;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -41,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.txtView);
         txtAcc = findViewById(R.id.txtAcc);
         txtTemp = findViewById(R.id.txtTemp);
+        speedBar = findViewById(R.id.speedbar);
+        throttleBar = findViewById(R.id.throttlebar);
+        txtSpeed = findViewById(R.id.speedTxt);
+        txtThrottle = findViewById(R.id.throttleTxt);
+        incTempButt = findViewById(R.id.tempPlusButt);
+        decTempButt = findViewById(R.id.tempMinButt);
+        eqTempButt = findViewById(R.id.tempEqButt);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
@@ -53,19 +65,85 @@ public class MainActivity extends AppCompatActivity {
         speed = 100;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference();
 
-        sendBatteryData(database);
-        readBatteryData(database);
+        //sendBatteryData(database);
+        //readBatteryData(database);
 
-        sendTempData(database);
+        //sendTempData(database);
         //readTempData(database);
 
-        sendSpeedData(database);
+        //sendSpeedData(database);
         //readSpeedData(database);
 
-        sendAccData(database);
-        readAccData(database);
+        //sendAccData(database);
+        //readAccData(database);
 
+        speedBar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        txtSpeed.setText("speed: "+i+"km/h");
+                        myRef.child("Speed").setValue(i);
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        txtSpeed.setText("speed: "+seekBar.getProgress()+"km/h");
+                        myRef.child("Speed").setValue(seekBar.getProgress());
+                    }
+                }
+        );
+
+        throttleBar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        txtThrottle.setText("throttle: "+i+"%");
+                        myRef.child("Throttle").setValue(i);
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        txtThrottle.setText("throttle: "+seekBar.getProgress()+"%");
+                        myRef.child("Throttle").setValue(seekBar.getProgress());
+                    }
+                }
+        );
+
+        incTempButt.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                temp++;
+                myRef.child("Temp").setValue(temp);
+            }
+        });
+        decTempButt.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                temp--;
+                myRef.child("Temp").setValue(temp);
+            }
+        });
+        eqTempButt.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                myRef.child("Temp").setValue(temp);
+            }
+        });
     }
 
     private void sendSpeedData(final FirebaseDatabase database) {

@@ -48,5 +48,125 @@
         android:textSize="25dp"
 
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp">
 
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/speedbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="250"
+            android:min="0">
+
+        </androidx.appcompat.widget.AppCompatSeekBar>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/speedTxt"
+            android:text="speed"
+            android:textSize="18dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtfortemp"
+            android:text="temp: "
+            android:textSize="18dp"
+        />
+        <Button
+            android:id="@+id/tempMinButt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min">
+
+        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempEqButt"
+            android:text="EQ"
+        />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempPlusButt"
+            android:text="Plus"
+        />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp">
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/throttlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:min="0">
+
+        </androidx.appcompat.widget.AppCompatSeekBar>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/throttleTxt"
+            android:text="throttle"
+            android:textSize="18dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtforbattery"
+            android:text="Battery: "
+            android:textSize="18dp"
+            />
+        <Button
+            android:id="@+id/batteryMinButt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min">
+
+        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/batteryEqButt"
+            android:text="EQ"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/batteryPlusButt"
+            android:text="Plus"
+            />
+
+    </LinearLayout>
 </RelativeLayout>
