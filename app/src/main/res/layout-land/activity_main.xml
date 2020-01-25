@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/intestazione"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invio dati ai BOX"
+        android:textSize="30dp"
+        android:typeface="serif"
+        android:textColor="#000000"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/speedTxt"
+        android:text="Speed"
+        android:textSize="18dp"
+        android:layout_below="@+id/intestazione"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/speedTxt"
+        android:id="@+id/layoutSpeedBar">
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/speedbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="250"
+            android:min="0">
+
+        </androidx.appcompat.widget.AppCompatSeekBar>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutTempButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/layoutSpeedBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtfortemp"
+            android:text="Temp: "
+            android:textSize="18dp"
+            />
+        <Button
+            android:id="@+id/tempMinButt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-">
+
+        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempEqButt"
+            android:text="EQ"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempPlusButt"
+            android:text="+"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/throttleTxt"
+        android:text="Throttle"
+        android:textSize="18dp"
+        android:layout_below="@+id/layoutTempButton"
+        />
+
+    <LinearLayout
+        android:id="@+id/layoutThrottleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/throttleTxt">
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/throttlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:min="0">
+
+        </androidx.appcompat.widget.AppCompatSeekBar>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/layoutThrottleBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtforbattery"
+            android:text="Battery: "
+            android:textSize="18dp"
+            />
+        <Button
+            android:id="@+id/batteryMinButt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-">
+
+        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/batteryEqButt"
+            android:text="EQ"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/batteryPlusButt"
+            android:text="+"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
