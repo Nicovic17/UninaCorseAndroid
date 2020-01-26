@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private SeekBar speedBar,throttleBar;
     private Location location;
-    private Button incTempButt,decTempButt,eqTempButt;
+    private Button incTempButt,decTempButt,eqTempButt,incBatteryButt,decBatteryButt,eqBatteryButt;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -54,30 +54,22 @@ public class MainActivity extends AppCompatActivity {
         decTempButt = findViewById(R.id.tempMinButt);
         eqTempButt = findViewById(R.id.tempEqButt);
 
+        incBatteryButt=findViewById(R.id.batteryPlusButt);
+        decBatteryButt=findViewById(R.id.batteryMinButt);
+        eqBatteryButt=findViewById(R.id.batteryEqButt);
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
         /*AggionaPosizione aggionaPosizione=new AggionaPosizione();
         aggionaPosizione.start();*/
 
-        livelloBatteria = 100;
+        livelloBatteria = 0;
         accIniziale = 0;
         temp = 20;
         speed = 100;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference();
-
-        //sendBatteryData(database);
-        //readBatteryData(database);
-
-        //sendTempData(database);
-        //readTempData(database);
-
-        //sendSpeedData(database);
-        //readSpeedData(database);
-
-        //sendAccData(database);
-        //readAccData(database);
 
         speedBar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -141,7 +133,49 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+
                 myRef.child("Temp").setValue(temp);
+            }
+        });
+
+        incBatteryButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(livelloBatteria!=100)
+                {
+                    livelloBatteria++;
+                    myRef.child("Batteria").setValue(livelloBatteria);
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this,"Batteria al 100%",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+        decBatteryButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(livelloBatteria!=0)
+                {
+                    livelloBatteria-=1;
+                    myRef.child("Batteria").setValue(livelloBatteria);
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this,"Batteria allo 0%", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        eqBatteryButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(MainActivity.this,"Setto batteria a 0",Toast.LENGTH_LONG).show();
+                myRef.child("Batteria").setValue(livelloBatteria);
             }
         });
     }
