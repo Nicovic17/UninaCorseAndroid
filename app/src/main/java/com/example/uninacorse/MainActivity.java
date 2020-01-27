@@ -32,9 +32,9 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     private int livelloBatteria, accIniziale, temp, speed;
-    private TextView textView, txtAcc, txtTemp, txtSpeed, txtThrottle;
+    private TextView textView, txtAcc, txtTemp, txtSpeed, txtThrottle, txtBreak;
     private LocationManager locationManager;
-    private SeekBar speedBar,throttleBar;
+    private SeekBar speedBar,throttleBar,breakBar;
     private Location location;
     private Button incTempButt,decTempButt,eqTempButt,incBatteryButt,decBatteryButt,eqBatteryButt;
 
@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.txtView);
-        txtAcc = findViewById(R.id.txtAcc);
-        txtTemp = findViewById(R.id.txtTemp);
         speedBar = findViewById(R.id.speedbar);
         throttleBar = findViewById(R.id.throttlebar);
+        breakBar = findViewById(R.id.breakbar);
         txtSpeed = findViewById(R.id.speedTxt);
         txtThrottle = findViewById(R.id.throttleTxt);
+        txtBreak = findViewById(R.id.breakTxt);
+
         incTempButt = findViewById(R.id.tempPlusButt);
         decTempButt = findViewById(R.id.tempMinButt);
         eqTempButt = findViewById(R.id.tempEqButt);
@@ -112,6 +112,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        breakBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener(){
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                txtBreak.setText("break: "+i+"%");
+                myRef.child("Break").setValue(i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                txtBreak.setText("break: "+seekBar.getProgress()+"%");
+                myRef.child("Break").setValue(seekBar.getProgress());
+            }
+        });
 
         incTempButt.setOnClickListener(new Button.OnClickListener(){
 

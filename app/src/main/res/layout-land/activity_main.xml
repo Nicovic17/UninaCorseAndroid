@@ -14,36 +14,12 @@
         android:layout_centerHorizontal="true"
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/speedTxt"
-        android:text="Speed"
-        android:textSize="18dp"
-        android:layout_below="@+id/intestazione"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/speedTxt"
-        android:id="@+id/layoutSpeedBar">
-
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/speedbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="250"
-            android:min="0">
-
-        </androidx.appcompat.widget.AppCompatSeekBar>
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/layoutTempButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/layoutSpeedBar">
+        android:layout_below="@+id/intestazione">
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,6 +49,31 @@
             />
 
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/speedTxt"
+        android:text="Speed"
+        android:textSize="18dp"
+        android:layout_below="@+id/layoutBattery"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/speedTxt"
+        android:id="@+id/layoutSpeedBar">
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/speedbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="250"
+            android:min="0">
+
+        </androidx.appcompat.widget.AppCompatSeekBar>
+    </LinearLayout>
+
+
 
     <TextView
         android:layout_width="match_parent"
@@ -80,7 +81,7 @@
         android:id="@+id/throttleTxt"
         android:text="Throttle"
         android:textSize="18dp"
-        android:layout_below="@+id/layoutTempButton"
+        android:layout_below="@+id/layoutSpeedBar"
         />
 
     <LinearLayout
@@ -103,7 +104,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/layoutThrottleBar">
+        android:layout_below="@+id/layoutTempButton"
+        android:id="@+id/layoutBattery">
 
         <TextView
             android:layout_width="wrap_content"
@@ -132,6 +134,31 @@
             android:text="+"
             />
 
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/breakTxt"
+        android:text="Break"
+        android:textSize="18dp"
+        android:layout_below="@+id/layoutThrottleBar"
+        />
+
+    <LinearLayout
+        android:id="@+id/layoutBreakBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/breakTxt">
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/breakbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:min="0">
+
+        </androidx.appcompat.widget.AppCompatSeekBar>
     </LinearLayout>
 
 

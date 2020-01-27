@@ -15,43 +15,10 @@
         android:textColor="#000000"
         android:layout_centerHorizontal="true"
         />
-
-    <TextView
-        android:id="@+id/txtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Batteria: "
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/intestazione"
-        android:textSize="25dp"
-
-        />
-
-    <TextView
-        android:id="@+id/txtAcc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Acelerazione: "
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/txtView"
-        android:textSize="25dp"
-
-        />
-
-    <TextView
-        android:id="@+id/txtTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Temperatura: "
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/txtAcc"
-        android:textSize="25dp"
-
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp">
+        android:layout_marginTop="60dp">
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/speedbar"
@@ -65,7 +32,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp">
+        android:layout_marginTop="80dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -77,7 +44,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="120dp"
         android:orientation="horizontal">
 
         <TextView
@@ -111,7 +78,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="360dp">
+        android:layout_marginTop="180dp">
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/throttlebar"
@@ -125,7 +92,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="380dp">
+        android:layout_marginTop="200dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -135,10 +102,12 @@
             />
     </LinearLayout>
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="280dp"
         android:orientation="horizontal">
 
         <TextView
