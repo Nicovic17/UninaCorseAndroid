@@ -145,6 +145,8 @@
         android:layout_below="@+id/layoutThrottleBar"
         />
 
+
+
     <LinearLayout
         android:id="@+id/layoutBreakBar"
         android:layout_width="match_parent"
@@ -159,7 +161,28 @@
             android:min="0">
 
         </androidx.appcompat.widget.AppCompatSeekBar>
+
+
+
+
     </LinearLayout>
 
+    <Button
+        android:layout_below="@+id/layoutBreakBar"
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Testooo"
+
+        />
+
+    <ImageView
+        android:id="@+id/wheel"
+        android:layout_below="@+id/layoutBreakBar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/volante"/>
 
 </RelativeLayout>

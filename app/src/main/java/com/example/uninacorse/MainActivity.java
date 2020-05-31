@@ -17,8 +17,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SeekBar;
@@ -29,20 +33,39 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private int livelloBatteria, accIniziale, temp, speed;
     private TextView textView, txtAcc, txtTemp, txtSpeed, txtThrottle, txtBreak;
     private LocationManager locationManager;
     private SeekBar speedBar,throttleBar,breakBar;
     private Location location;
-    private Button incTempButt,decTempButt,eqTempButt,incBatteryButt,decBatteryButt,eqBatteryButt;
+    private Button incTempButt,decTempButt,eqTempButt,incBatteryButt,decBatteryButt,eqBatteryButt, testButton;
+
+    //Rotazione volante
+    private ImageView wheel;
+    private double mCurrAngle=0;
+    private double mPrevAngle=0;
+    private FirebaseDatabase firebaseDatabase;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Rotazione volante
+        wheel=findViewById(R.id.wheel);
+
+        wheel.setOnTouchListener(this);
+
+        //Rotazione volante
+
+
         speedBar = findViewById(R.id.speedbar);
         throttleBar = findViewById(R.id.throttlebar);
         breakBar = findViewById(R.id.breakbar);
@@ -53,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
         incTempButt = findViewById(R.id.tempPlusButt);
         decTempButt = findViewById(R.id.tempMinButt);
         eqTempButt = findViewById(R.id.tempEqButt);
+        testButton=findViewById(R.id.test);
+
+
+
 
         incBatteryButt=findViewById(R.id.batteryPlusButt);
         decBatteryButt=findViewById(R.id.batteryMinButt);
@@ -68,8 +95,16 @@ public class MainActivity extends AppCompatActivity {
         temp = 20;
         speed = 100;
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        firebaseDatabase=database;
         final DatabaseReference myRef = database.getReference();
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeData(database);
+            }
+        });
 
         speedBar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -313,6 +348,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void writeData(final FirebaseDatabase firebaseDatabase){
+
+        Date currentDate= Calendar.getInstance().getTime();
+        final String data=currentDate.toString();
+
+        final boolean loop=true;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                // Write a message to the database
+                DatabaseReference myRef=firebaseDatabase.getReference("Sensori").child(data);
+                for(int i=0;i<132;i++)
+                {
+                    myRef.child(i+"").child("Nome").setValue("Nome");
+                    myRef.child(i+"").child("Valore").setValue("Val");
+
+                }
+
+                if(loop)writeData(firebaseDatabase);
+
+            }
+        }, 1000);
+
+
+    }
+
+
+
     private void readBatteryData(FirebaseDatabase database) {
 
         DatabaseReference myRef = database.getReference("Batteria");
@@ -334,6 +399,60 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    //Rotazione volante
+
+    private void writeAngleWheel(final FirebaseDatabase firebaseDatabase, double angolo)
+    {
+        DatabaseReference myRef=firebaseDatabase.getReference("realTime/001/value");
+        String newAngolo=new DecimalFormat("##.##").format(angolo);
+
+        myRef.setValue(angolo);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        final float xc=wheel.getWidth()/2;
+        final float yc=wheel.getHeight()/2;
+
+        final float x=event.getX();
+        final float y=event.getY();
+
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:{
+                wheel.clearAnimation();
+                mCurrAngle=Math.toDegrees(Math.atan2(x-xc,yc-y));
+                break;
+            }
+            case MotionEvent.ACTION_MOVE:{
+                mPrevAngle=mCurrAngle;
+                mCurrAngle=Math.toDegrees(Math.atan2(x-xc,yc-y));
+                animate(mPrevAngle,mCurrAngle,0);
+                System.out.println("Curr angle: "+mCurrAngle);
+                writeAngleWheel(firebaseDatabase,mCurrAngle);
+                break;
+            }
+            case MotionEvent.ACTION_UP:{
+                mPrevAngle=mCurrAngle=0;
+                break;
+            }
+        }
+        return true;
+    }
+
+    private void animate(double fromDegrees, double toDegrees, long durationMillis){
+        final RotateAnimation rotate=new RotateAnimation((float)fromDegrees,(float)toDegrees,RotateAnimation.RELATIVE_TO_SELF,0.5f,
+                Animation.RELATIVE_TO_SELF,0.5f);
+        rotate.setDuration(durationMillis);
+        rotate.setFillEnabled(true);
+        rotate.setFillAfter(true);
+        wheel.startAnimation(rotate);
+        writeAngleWheel(firebaseDatabase,mCurrAngle);
+    }
+
+
+
+    //Rotazione volante
 
     public class AggionaPosizione extends Thread {
 
