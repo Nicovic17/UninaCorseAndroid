@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                         txtSpeed.setText("speed: "+i+"km/h");
-                        myRef.child("Speed").setValue(i);
+                        myRef.child("storico/004/" + (System.currentTimeMillis()/5)).setValue(i);
                     }
 
                     @Override
@@ -121,8 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
-                        txtSpeed.setText("speed: "+seekBar.getProgress()+"km/h");
-                        myRef.child("Speed").setValue(seekBar.getProgress());
+
                     }
                 }
         );
@@ -132,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                         txtThrottle.setText("throttle: "+i+"%");
-                        myRef.child("Throttle").setValue(i);
+                        myRef.child("storico/011/" + System.currentTimeMillis()).setValue(i);
                     }
 
                     @Override
@@ -142,8 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
-                        txtThrottle.setText("throttle: "+seekBar.getProgress()+"%");
-                        myRef.child("Throttle").setValue(seekBar.getProgress());
+
                     }
                 }
         );
@@ -153,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 txtBreak.setText("break: "+i+"%");
-                myRef.child("Break").setValue(i);
+                myRef.child("storico/012/" + System.currentTimeMillis()).setValue(i);
             }
 
             @Override
@@ -235,27 +233,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
     }
 
-    private void sendSpeedData(final FirebaseDatabase database) {
-
-        final DatabaseReference myRef = database.getReference();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                if (speed == 100) {
-                    myRef.child("Speed").setValue("Sei al massimo.");
-                } else {
-                    speed += 5;
-                    myRef.child("Speed").setValue(speed + "km/h");
-                }
-
-
-                sendSpeedData(database);
-            }
-        }, 1500);
-
-    }
 
     private void sendTempData(final FirebaseDatabase database) {
 
@@ -404,10 +381,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private void writeAngleWheel(final FirebaseDatabase firebaseDatabase, double angolo)
     {
-        DatabaseReference myRef=firebaseDatabase.getReference("realTime/001/value");
+        DatabaseReference myRef=firebaseDatabase.getReference("/");
         String newAngolo=new DecimalFormat("##.##").format(angolo);
 
-        myRef.setValue(angolo);
+        myRef.child("storico/001/" + System.currentTimeMillis()).setValue(angolo);
     }
 
     @Override
