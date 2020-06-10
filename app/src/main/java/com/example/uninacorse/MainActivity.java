@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int livelloBatteria, accIniziale, temp, speed;
     private TextView textView, txtAcc, txtTemp, txtSpeed, txtThrottle, txtBreak;
     private LocationManager locationManager;
-    private SeekBar speedBar,throttleBar,breakBar;
+    private SeekBar speedBar,throttleBar,breakBar,longAccBar,latAccBar;
     private Location location;
-    private Button incTempButt,decTempButt,eqTempButt,incBatteryButt,decBatteryButt,eqBatteryButt, testButton;
+    private Button incTempButt,decTempButt,eqTempButt,incBatteryButt,decBatteryButt,eqBatteryButt;
 
     //Rotazione volante
     private ImageView wheel;
@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         speedBar = findViewById(R.id.speedbar);
         throttleBar = findViewById(R.id.throttlebar);
         breakBar = findViewById(R.id.breakbar);
+        longAccBar = findViewById(R.id.longAccBar);
+        latAccBar = findViewById(R.id.latAccBar);
         txtSpeed = findViewById(R.id.speedTxt);
         txtThrottle = findViewById(R.id.throttleTxt);
         txtBreak = findViewById(R.id.breakTxt);
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         incTempButt = findViewById(R.id.tempPlusButt);
         decTempButt = findViewById(R.id.tempMinButt);
         eqTempButt = findViewById(R.id.tempEqButt);
-        testButton=findViewById(R.id.test);
+
 
 
 
@@ -98,13 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         firebaseDatabase=database;
         final DatabaseReference myRef = database.getReference();
-
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                writeData(database);
-            }
-        });
 
         speedBar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -161,8 +156,47 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                txtBreak.setText("break: "+seekBar.getProgress()+"%");
-                myRef.child("Break").setValue(seekBar.getProgress());
+
+            }
+        });
+
+        longAccBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener(){
+            float temp;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                //txtBreak.setText("break: "+i+"%");
+                temp = ((float) i)/10;
+                myRef.child("storico/002/" + System.currentTimeMillis()).setValue(temp);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        latAccBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener(){
+            float temp;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                //txtBreak.setText("break: "+i+"%");
+                temp = ((float) i)/10;
+                myRef.child("storico/003/" + System.currentTimeMillis()).setValue(temp);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 

@@ -167,22 +167,59 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_below="@+id/layoutBreakBar"
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Testooo"
-
-        />
-
-    <ImageView
-        android:id="@+id/wheel"
         android:layout_below="@+id/layoutBreakBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/volante"/>
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/wheel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutBreakBar"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="9dp"
+            android:src="@drawable/volante" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/longAccTxt"
+                android:text="LongAcc"
+                android:textSize="18dp"
+                android:layout_below="@+id/layoutThrottleBar"
+                />
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/longAccBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:min="-100">
+
+            </androidx.appcompat.widget.AppCompatSeekBar>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/latAccTxt"
+                android:text="LatAcc"
+                android:textSize="18dp"
+                android:layout_below="@+id/layoutThrottleBar"
+                />
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/latAccBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:min="-100">
+
+            </androidx.appcompat.widget.AppCompatSeekBar>
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
