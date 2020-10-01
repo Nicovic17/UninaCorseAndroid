@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                         txtSpeed.setText("speed: "+i+"km/h");
-                        myRef.child("storico/004/" + (System.currentTimeMillis()/5)).setValue(i);
+                        myRef.child("storico/004/" + (System.currentTimeMillis())).setValue(i);
                     }
 
                     @Override
