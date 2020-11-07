@@ -44,8 +44,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
-    private int livelloBatteria, accIniziale, temp, speed;
-    private TextView txtAccLat, txtAccLong, txtTemp, txtSpeed, txtThrottle, txtBreak, txtLiquidoRaff, txtBatteryHV, txtBatteryLV, txtPressioneFreno, txtFlussoRaff,
+    private TextView txtAccLat, txtAccLong, txtSpeed, txtThrottle, txtBreak, txtLiquidoRaff, txtBatteryHV, txtBatteryLV, txtPressioneFreno, txtFlussoRaff,
     txtRollio, txtBeccheggio, txtImbardata, txtEngine1, txtEngine2, txtEngine3, txtEngine4, txtIGBT1,txtIGBT2,txtIGBT3,txtIGBT4;
     private LocationManager locationManager;
     private SeekBar speedBar,throttleBar,breakBar,longAccBar,latAccBar, tempBar, batteryBar, batteryBarLV, pressioneFrenoBar,flussoRaffBar, rollioBar, beccheggioBar,
@@ -128,16 +127,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempIGBTEngine3Bar=findViewById(R.id.tempTempIGBTEngine3);
         tempIGBTEngine4Bar=findViewById(R.id.tempTempIGBTEngine4);
 
-
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-        /*AggionaPosizione aggionaPosizione=new AggionaPosizione();
-        aggionaPosizione.start();*/
 
-        livelloBatteria = 0;
-        accIniziale = 0;
-        temp = 20;
-        speed = 100;
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         firebaseDatabase=database;
@@ -146,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtLiquidoRaff.setText("Temperatura liquido raffreddamento:"+ " "+ progress + "%");
+                txtLiquidoRaff.setText("Temperatura liquido raffreddamento:"+ " "+ progress + "°");
                 myRef.child("storico/297/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -206,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         pressioneFrenoBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtPressioneFreno.setText("Pressione circuito freno:"+ " "+ progress + "%");
+                txtPressioneFreno.setText("Pressione circuito freno:"+ " "+ progress + "Pa");
                 myRef.child("storico/296/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -224,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         flussoRaffBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtFlussoRaff.setText("Flusso liquido di raffreddamento:"+ " "+ progress + "%");
+                txtFlussoRaff.setText("Flusso liquido di raffreddamento:"+ " "+ progress + "l/m");
                 myRef.child("storico/314/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -242,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         rollioBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtRollio.setText("Angolo di rollio:"+ " "+ progress + "%");
+                txtRollio.setText("Angolo di rollio:"+ " "+ progress + "°");
                 myRef.child("storico/313/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -260,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         beccheggioBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtBeccheggio.setText("Angolo di beccheggio:"+ " "+ progress + "%");
+                txtBeccheggio.setText("Angolo di beccheggio:"+ " "+ progress + "°");
                 myRef.child("storico/311/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -278,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         imbardataBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtImbardata.setText("Angolo di beccheggio:"+ " "+ progress + "%");
+                txtImbardata.setText("Angolo di beccheggio:"+ " "+ progress + "°");
                 myRef.child("storico/312/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -296,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempEngine1Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtEngine1.setText("Temperatura motore 1:"+ " "+ progress + "%");
+                txtEngine1.setText("Temperatura motore 1:"+ " "+ progress + "°");
                 myRef.child("storico/287/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -314,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempEngine2Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtEngine2.setText("Temperatura motore 2:"+ " "+ progress + "%");
+                txtEngine2.setText("Temperatura motore 2:"+ " "+ progress + "°");
                 myRef.child("storico/288/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -332,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempEngine3Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtEngine3.setText("Temperatura motore 3:"+ " "+ progress + "%");
+                txtEngine3.setText("Temperatura motore 3:"+ " "+ progress + "°");
                 myRef.child("storico/289/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -350,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempEngine4Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtEngine4.setText("Temperatura motore 4:"+ " "+ progress + "%");
+                txtEngine4.setText("Temperatura motore 4:"+ " "+ progress + "°");
                 myRef.child("storico/290/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -368,7 +359,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempIGBTEngine1Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtIGBT1.setText("Temperatura IGBT motore 1:"+ " "+ progress + "%");
+                txtIGBT1.setText("Temperatura IGBT motore 1:"+ " "+ progress + "°");
                 myRef.child("storico/292/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -386,7 +377,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempIGBTEngine2Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtIGBT2.setText("Temperatura IGBT motore 2:"+ " "+ progress + "%");
+                txtIGBT2.setText("Temperatura IGBT motore 2:"+ " "+ progress + "°");
                 myRef.child("storico/293/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -404,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempIGBTEngine3Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtIGBT3.setText("Temperatura IGBT motore 3:"+ " "+ progress + "%");
+                txtIGBT3.setText("Temperatura IGBT motore 3:"+ " "+ progress + "°");
                 myRef.child("storico/294/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -422,7 +413,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempIGBTEngine4Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtIGBT4.setText("Temperatura IGBT motore 4:"+ " "+ progress + "%");
+                txtIGBT4.setText("Temperatura IGBT motore 4:"+ " "+ progress + "°");
                 myRef.child("storico/295/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -502,8 +493,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             float temp;
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                temp = ((float) i)/20;
-                txtAccLong.setText("Accelerazione longitudinale: "+temp+"%");
+                temp = ((float) i)/10;
+                txtAccLong.setText("Accelerazione longitudinale: "+temp+"m/s^2");
                 myRef.child("storico/002/" + System.currentTimeMillis()).setValue(temp);
             }
 
@@ -523,8 +514,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 //txtBreak.setText("break: "+i+"%");
-                temp = ((float) i)/20;
-                txtAccLong.setText("Accelerazione latitudinale: "+temp+"%");
+                temp = ((float) i)/10;
+                txtAccLat.setText("Accelerazione latitudinale: "+temp+"m/s^2");
                 myRef.child("storico/003/" + System.currentTimeMillis()).setValue(temp);
             }
 
