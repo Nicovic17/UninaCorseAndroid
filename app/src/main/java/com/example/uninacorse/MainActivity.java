@@ -419,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempIGBTEngine2Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtIGBT2.setText("Temperatura IGBT motore 2:"+ " "+ progress + "°");
+                txtIGBT3.setText("Temperatura IGBT motore 3:"+ " "+ progress + "°");
                 myRef.child("storico/293/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -437,7 +437,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempIGBTEngine3Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtIGBT3.setText("Temperatura IGBT motore 3:"+ " "+ progress + "°");
+                txtIGBT2.setText("Temperatura IGBT motore 2:"+ " "+ progress + "°");
                 myRef.child("storico/294/"+(System.currentTimeMillis())).setValue(progress);
             }
 
