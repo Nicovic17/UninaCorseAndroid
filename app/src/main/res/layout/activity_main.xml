@@ -601,6 +601,7 @@
                     </androidx.appcompat.widget.AppCompatSeekBar>
 
                     <Button
+                        android:layout_marginTop="80px"
                         android:id="@+id/btnLogout"
                         android:layout_centerHorizontal="true"
                         android:text="Logout"
