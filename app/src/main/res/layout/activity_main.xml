@@ -501,7 +501,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layoutTempIGBTEngine2"
+                android:id="@+id/layoutTempIGBTEngine3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layoutThrottleBar"
@@ -517,7 +517,7 @@
                     />
 
                 <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/tempTempIGBTEngine2"
+                    android:id="@+id/tempTempIGBTEngine3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
@@ -528,7 +528,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layoutTempIGBTEngine3"
+                android:id="@+id/layoutTempIGBTEngine2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layoutThrottleBar"
@@ -544,7 +544,7 @@
                     />
 
                 <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/tempTempIGBTEngine3"
+                    android:id="@+id/tempTempIGBTEngine2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
@@ -553,6 +553,8 @@
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/layoutTempIGBTEngine4"
