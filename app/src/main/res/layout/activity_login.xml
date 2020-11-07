@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@color/unina">
+
+        <ImageView
+            android:layout_above="@id/etxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logominiunina"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:theme="@style/EditTextTheme"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/etxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"/>
+
+
+
+
+        <EditText
+            android:theme="@style/EditTextTheme"
+            android:layout_below="@+id/etxt"
+            android:inputType="textPassword"
+            android:id="@+id/etxt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            />
+
+
+    <Button
+        android:id="@+id/btnSalva"
+        android:layout_below="@+id/etxt2"
+        android:layout_centerHorizontal="true"
+        android:text="Login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"/>
+
+</RelativeLayout>

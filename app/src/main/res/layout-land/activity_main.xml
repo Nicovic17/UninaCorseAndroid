@@ -3,6 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+<LinearLayout
+    android:id="@+id/layoutIntestazione"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
     <TextView
         android:id="@+id/intestazione"
         android:layout_width="wrap_content"
@@ -11,215 +19,272 @@
         android:textSize="30dp"
         android:typeface="serif"
         android:textColor="#000000"
-        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         />
 
-    <LinearLayout
-        android:id="@+id/layoutTempButton"
+    <ImageView
+
+        android:id="@+id/wheel"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/intestazione"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="9dp"
+        android:src="@drawable/volante" />
+</LinearLayout>
+
+
+
+
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_below="@id/layoutIntestazione"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/intestazione">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtfortemp"
-            android:text="Temp: "
-            android:textSize="18dp"
-            />
-        <Button
-            android:id="@+id/tempMinButt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-">
-
-        </Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tempEqButt"
-            android:text="Set to 20°"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tempPlusButt"
-            android:text="+"
-            />
-
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/speedTxt"
-        android:text="Speed"
-        android:textSize="18dp"
-        android:layout_below="@+id/layoutBattery"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/speedTxt"
-        android:id="@+id/layoutSpeedBar">
-
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/speedbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="250"
-            android:min="0">
-
-        </androidx.appcompat.widget.AppCompatSeekBar>
-    </LinearLayout>
+        android:layout_height="match_parent">
 
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/throttleTxt"
-        android:text="Throttle"
-        android:textSize="18dp"
-        android:layout_below="@+id/layoutSpeedBar"
-        />
-
-    <LinearLayout
-        android:id="@+id/layoutThrottleBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/throttleTxt">
-
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/throttlebar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:min="0">
-
-        </androidx.appcompat.widget.AppCompatSeekBar>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/layoutTempButton"
-        android:id="@+id/layoutBattery">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtforbattery"
-            android:text="Battery: "
-            android:textSize="18dp"
-            />
-        <Button
-            android:id="@+id/batteryMinButt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-">
-
-        </Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/batteryEqButt"
-            android:text="Set to 0%"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/batteryPlusButt"
-            android:text="+"
-            />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/breakTxt"
-        android:text="Break"
-        android:textSize="18dp"
-        android:layout_below="@+id/layoutThrottleBar"
-        />
-
-
-
-    <LinearLayout
-        android:id="@+id/layoutBreakBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/breakTxt">
-
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/breakbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:min="0">
-
-        </androidx.appcompat.widget.AppCompatSeekBar>
-
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutBreakBar"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/wheel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutBreakBar"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="9dp"
-            android:src="@drawable/volante" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/longAccTxt"
-                android:text="LongAcc"
-                android:textSize="18dp"
-                android:layout_below="@+id/layoutThrottleBar"
-                />
-            <androidx.appcompat.widget.AppCompatSeekBar
-                android:id="@+id/longAccBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="100"
-                android:min="-100">
 
-            </androidx.appcompat.widget.AppCompatSeekBar>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/latAccTxt"
-                android:text="LatAcc"
-                android:textSize="18dp"
-                android:layout_below="@+id/layoutThrottleBar"
-                />
-            <androidx.appcompat.widget.AppCompatSeekBar
-                android:id="@+id/latAccBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="100"
-                android:min="-100">
+            <!-- things to scroll -->
 
-            </androidx.appcompat.widget.AppCompatSeekBar>
+            <LinearLayout
+                android:id="@+id/layoutTempButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtfortemp"
+                    android:text="Temp: "
+                    android:textSize="18dp"
+                    />
+                <Button
+                    android:id="@+id/tempMinButt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-">
+
+                </Button>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tempEqButt"
+                    android:text="Set to 20°"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tempPlusButt"
+                    android:text="+"
+                    />
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/layoutTempButton"
+                android:id="@+id/layoutBattery">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtforbattery"
+                    android:text="Battery: "
+                    android:textSize="18dp"
+                    />
+                <Button
+                    android:id="@+id/batteryMinButt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-">
+
+                </Button>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/batteryEqButt"
+                    android:text="Set to 0%"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/batteryPlusButt"
+                    android:text="+"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/layoutSpeedBar"
+                android:layout_below="@+id/layoutBattery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/speedTxt"
+                    android:text="Speed"
+                    android:textSize="18dp"
+                    android:layout_below="@+id/layoutBattery"
+                    />
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/speedbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="250"
+                    android:min="0">
+
+                </androidx.appcompat.widget.AppCompatSeekBar>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/layoutThrottleBar"
+                android:layout_below="@+id/layoutSpeedBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/throttleTxt"
+                    android:text="Throttle"
+                    android:textSize="18dp"
+                    android:layout_below="@+id/layoutSpeedBar"
+                    />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/throttlebar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:min="0"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layoutBreakBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutThrottleBar"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/breakTxt"
+                    android:text="Break"
+                    android:textSize="18dp"
+                    android:layout_below="@+id/layoutThrottleBar"
+                    />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/breakbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:min="0">
+
+                </androidx.appcompat.widget.AppCompatSeekBar>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutBreakBar"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/longAccTxt"
+                        android:text="LongAcc"
+                        android:textSize="18dp"
+                        android:layout_below="@+id/layoutThrottleBar"
+                        />
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/longAccBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:min="-100">
+
+                    </androidx.appcompat.widget.AppCompatSeekBar>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/latAccTxt"
+                        android:text="LatAcc"
+                        android:textSize="18dp"
+                        android:layout_below="@+id/layoutThrottleBar"
+                        />
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/latAccBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:min="-100">
+
+                    </androidx.appcompat.widget.AppCompatSeekBar>
+
+                    <Button
+                        android:id="@+id/btnLogout"
+                        android:layout_centerHorizontal="true"
+                        android:text="Logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_button"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </RelativeLayout>
