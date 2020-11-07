@@ -576,6 +576,7 @@
                         android:layout_below="@+id/layoutThrottleBar"
                         />
                     <androidx.appcompat.widget.AppCompatSeekBar
+                        android:layout_marginBottom="100px"
                         android:id="@+id/longAccBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -601,7 +602,7 @@
                     </androidx.appcompat.widget.AppCompatSeekBar>
 
                     <Button
-                        android:layout_marginTop="80px"
+                        android:layout_marginTop="130px"
                         android:id="@+id/btnLogout"
                         android:layout_centerHorizontal="true"
                         android:text="Logout"
