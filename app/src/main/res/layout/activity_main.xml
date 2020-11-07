@@ -366,6 +366,33 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutTempEngine3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutThrottleBar"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtTempEngine3"
+                    android:text="Temperatura motore 2:"
+                    android:textSize="18dp"
+                    android:layout_below="@+id/layoutThrottleBar"
+                    />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/tempEngine3Bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:min="0">
+
+                </androidx.appcompat.widget.AppCompatSeekBar>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/layoutTempEngine2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -376,7 +403,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtTempEngine2"
-                    android:text="Temperatura motore 2:"
+                    android:text="Temperatura motore 3:"
                     android:textSize="18dp"
                     android:layout_below="@+id/layoutThrottleBar"
                     />
@@ -392,32 +419,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/layoutTempEngine3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layoutThrottleBar"
-                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtTempEngine3"
-                    android:text="Temperatura motore 3:"
-                    android:textSize="18dp"
-                    android:layout_below="@+id/layoutThrottleBar"
-                    />
-
-                <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/tempEngine3Bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="100"
-                    android:min="0">
-
-                </androidx.appcompat.widget.AppCompatSeekBar>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layoutTempEngine4"

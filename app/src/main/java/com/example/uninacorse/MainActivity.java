@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempEngine2Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtEngine2.setText("Temperatura motore 2:"+ " "+ progress + "°");
+                txtEngine2.setText("Temperatura motore 3:"+ " "+ progress + "°");
                 myRef.child("storico/288/"+(System.currentTimeMillis())).setValue(progress);
             }
 
@@ -323,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tempEngine3Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtEngine3.setText("Temperatura motore 3:"+ " "+ progress + "°");
+                txtEngine3.setText("Temperatura motore 2:"+ " "+ progress + "°");
                 myRef.child("storico/289/"+(System.currentTimeMillis())).setValue(progress);
             }
 
