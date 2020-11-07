@@ -1,5 +1,7 @@
 package com.example.uninacorse;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -30,6 +33,7 @@ import android.widget.SeekBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,14 +54,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private SeekBar speedBar,throttleBar,breakBar,longAccBar,latAccBar, tempBar, batteryBar, batteryBarLV, pressioneFrenoBar,flussoRaffBar, rollioBar, beccheggioBar,
     imbardataBar, tempEngine1Bar, tempEngine2Bar, tempEngine3Bar, tempEngine4Bar, tempIGBTEngine1Bar,tempIGBTEngine2Bar,tempIGBTEngine3Bar,tempIGBTEngine4Bar;
     private Location location;
-    private Button btnLogout;
+    private Button btnLogout, btnBMS, btnTRQ;
     private FirebaseAuth mAuth;
     //Rotazione volante
     private ImageView wheel;
     private double mCurrAngle=0;
     private double mPrevAngle=0;
     private FirebaseDatabase firebaseDatabase;
-
+    String currValBMS="";
+    String currValTRQ="";
     private ScrollView scrollView;
 
 
@@ -106,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         txtAccLat=findViewById(R.id.txtLatAcc);
         txtAccLong=findViewById(R.id.txtLongAcc);
 
+        btnBMS=findViewById(R.id.btnBMS);
+        btnTRQ=findViewById(R.id.btnTRQ);
 
 
         tempBar=findViewById(R.id.tempBar);
@@ -133,6 +140,41 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         firebaseDatabase=database;
         final DatabaseReference myRef = database.getReference();
+
+        ascoltaBMS(myRef);
+        ascoltaTRQ(myRef);
+
+        btnBMS.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+
+                if(currValBMS=="0")
+                {
+                    myRef.child("storico/320/"+(System.currentTimeMillis())).setValue("1");
+                }
+                else{
+                    myRef.child("storico/320/"+(System.currentTimeMillis())).setValue("0");
+                }
+
+            }
+        });
+
+
+
+        btnTRQ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currValTRQ=="0")
+                {
+                    myRef.child("storico/316/"+(System.currentTimeMillis())).setValue("1");
+                }
+                else{
+                    myRef.child("storico/316/"+(System.currentTimeMillis())).setValue("0");
+                }
+            }
+        });
 
         tempBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -539,6 +581,90 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
     }
 
+
+
+    public void ascoltaBMS(DatabaseReference myRef)
+    {
+        myRef.child("storico/320/").orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                currValBMS=snapshot.getValue().toString();
+
+                if(currValBMS.equals("0"))
+                {
+                    btnBMS.setText("Attiva spia BMS");
+                    btnBMS.setTextColor(Color.BLACK);
+                }
+                else if(currValBMS.equals("1"))
+                {
+                    btnBMS.setText("Disattiva spia BMS");
+                    btnBMS.setTextColor(Color.RED);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void ascoltaTRQ(DatabaseReference myRef)
+    {
+        myRef.child("storico/316/").orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                currValTRQ=snapshot.getValue().toString();
+
+                if(currValTRQ.equals("0"))
+                {
+                    btnTRQ.setText("Attiva spia TRQ");
+                    btnTRQ.setTextColor(Color.BLACK);
+                }
+                else if(currValTRQ.equals("1"))
+                {
+                    btnTRQ.setText("Disattiva spia TRQ");
+                    btnTRQ.setTextColor(Color.RED);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     protected void logout()
     {
         mAuth = FirebaseAuth.getInstance();

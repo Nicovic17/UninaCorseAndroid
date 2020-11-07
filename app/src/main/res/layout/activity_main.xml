@@ -53,6 +53,31 @@
             <!-- things to scroll -->
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnBMS"
+                    android:layout_centerHorizontal="true"
+                    android:text="Attiva spia BMS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button"
+                    android:layout_marginBottom="20px"/>
+                <Button
+                    android:id="@+id/btnTRQ"
+                    android:layout_centerHorizontal="true"
+                    android:text="Attiva spia TRQ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button"
+                    android:layout_marginBottom="50px"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/layoutTempButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,8 +97,8 @@
                     android:id="@+id/tempBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="250"
-                    android:min="0">
+                    android:max="100"
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
@@ -178,7 +203,7 @@
                     android:id="@+id/pressioneFrenoBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="250"
+                    android:max="80"
                     android:min="0">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
@@ -203,7 +228,7 @@
                     android:id="@+id/flussoRaffBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="250"
+                    android:max="30"
                     android:min="0">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
@@ -229,7 +254,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="30"
-                android:min="0">
+                android:min="-30">
 
             </androidx.appcompat.widget.AppCompatSeekBar>
         </LinearLayout>
@@ -253,8 +278,8 @@
                     android:id="@+id/beccheggioBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="250"
-                    android:min="0">
+                    android:max="15"
+                    android:min="-15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
             </LinearLayout>
@@ -278,8 +303,8 @@
                     android:id="@+id/imbardataBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="250"
-                    android:min="0">
+                    android:max="30"
+                    android:min="-30">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
             </LinearLayout>
@@ -359,7 +384,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:min="0">
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
@@ -386,7 +411,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:min="0">
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
@@ -413,7 +438,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:min="0">
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
@@ -442,7 +467,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:min="0">
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
@@ -469,7 +494,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:min="0">
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
@@ -496,7 +521,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:min="0">
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
@@ -523,7 +548,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:min="0">
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
@@ -550,7 +575,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:min="0">
+                    android:min="15">
 
                 </androidx.appcompat.widget.AppCompatSeekBar>
 
